@@ -18,7 +18,7 @@ func main() {
 	}
 
 	p := os.Args[1]
-	l, err := net.Listen("tcp", ":"+p)s
+	l, err := net.Listen("tcp", ":"+p)
 
 	if err != nil {
 		log.Fatalf("failed to listen port:%s, %v", p, err)
