@@ -9,6 +9,7 @@ type Config struct {
 	Port int    `env:"PORT" envDefault:"80"`
 }
 
+//
 func New() (*Config, error) {
 	cfg := &Config{}
 	if err := env.Parse(cfg); err != nil {

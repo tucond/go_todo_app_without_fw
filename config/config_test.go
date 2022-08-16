@@ -21,3 +21,5 @@ func TestNew(t *testing.T) {
 		t.Errorf("Want %s, but %s", wantEnv, got.Env)
 	}
 }
+
+//
