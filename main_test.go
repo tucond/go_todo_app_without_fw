@@ -12,7 +12,7 @@ import (
 )
 
 func TestRun(t *testing.T) {
-	t.Skep("リファクタリング中")
+	t.Skip("リファクタリング中")
 
 	l, err := net.Listen("tcp", "localhost:0")
 	if err != nil {
