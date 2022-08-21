@@ -2,14 +2,13 @@ package main
 
 import (
 	"context"
+	"golang.org/x/sync/errgroup"
 	"log"
 	"net"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
-
-	"github.org/x/sync/errgroup"
 )
 
 type Server struct {
@@ -29,7 +28,7 @@ func (s *Server) Run(ctx context.Context) error {
 	defer stop()
 	eg, ctx := errgroup.WithContext(ctx)
 	eg.Go(func() error {
-		if err := s.srv.Serve(s, l); err != nil &&
+		if err := s.srv.Serve(s.l); err != nil &&
 			err != http.ErrServerClosed {
 			log.Printf("failed to close: %+v", err)
 			return err
