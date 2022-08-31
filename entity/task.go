@@ -2,20 +2,20 @@ package entity
 
 import "time"
 
-type TaskID int 64
+type TaskID int64
 type TaskStatus string
 
 const (
-	TaskStatusTodo TaskStatus = "todo"
+	TaskStatusTodo  TaskStatus = "todo"
 	TaskStatusDoing TaskStatus = "doing"
-	TaskStatusDone TaskStatus = "done"
+	TaskStatusDone  TaskStatus = "done"
 )
 
-type Task struct{
-	ID TaskId `json:"id"`
-	Title string `json:"title"`
-	Status TaskStatus `json:"status"`
-	Created time.Time `json:"created"`
+type Task struct {
+	ID      TaskId     `json:"id"`
+	Title   string     `json:"title"`
+	Status  TaskStatus `json:"status"`
+	Created time.Time  `json:"created"`
 }
 
 type Tasks []*Task
