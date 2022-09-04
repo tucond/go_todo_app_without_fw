@@ -6,6 +6,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-playground/validator/v10"
+	"github.com/tucond/go_todo_app_without_fw/entity"
+	"github.com/tucond/go_todo_app_without_fw/store"
 	"github.com/tucond/go_todo_app_without_fw/testutil"
 )
 
@@ -42,11 +45,24 @@ func TestAddTask(t *testing.T) {
 
 			w := httptest.NewRecorder()
 			r := httptest.NewRequest(
-				http.methodPost,
+				http.MethodPost,
 				"/tasks",
 				bytes.NewReader(testutil.LoadFile(t, tt.reqFile)),
 			)
 
-		}) //途中
+			sut := AddTask{
+				Store: &store.TaskStore{
+					Tasks: map[entity.TaskID]*entity.Task{},
+				},
+				Validator: validator.New(),
+			}
+			sut.ServeHTTP(w, r)
+
+			resp := w.Result()
+			testutil.AssertResponse(t,
+				resp, tt.want.status, testutil.LoadFile(t, tt.want.rspFile),
+			)
+
+		})
 	}
 }
