@@ -1,8 +1,12 @@
 package handler
 
 import (
+	"bytes"
 	"net/http"
+	"net/http/httptest"
 	"testing"
+
+	"github.com/tucond/go_todo_app_without_fw/testutil"
 )
 
 func TestAddTask(t *testing.T) {
@@ -36,8 +40,13 @@ func TestAddTask(t *testing.T) {
 		t.Run(n, func(t *testing.T) {
 			t.Parallel()
 
-			//途中
+			w := httptest.NewRecorder()
+			r := httptest.NewRequest(
+				http.methodPost,
+				"/tasks",
+				bytes.NewReader(testutil.LoadFile(t, tt.reqFile)),
+			)
 
-		})
+		}) //途中
 	}
 }
