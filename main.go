@@ -5,14 +5,9 @@ import (
 	"fmt"
 	"log"
 	"net"
-	"net/http"
 	"os"
-	"os/signal"
-	"syscall"
-	"time"
 
 	"github.com/tucond/go_todo_app_without_fw/config"
-	"golang.org/x/sync/errgroup"
 )
 
 func main() {
@@ -24,7 +19,7 @@ func main() {
 
 func run(ctx context.Context) error {
 
-	cfg, err = config.New()
+	cfg, err := config.New()
 	if err != nil {
 		return err
 	}
