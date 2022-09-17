@@ -6,7 +6,7 @@ on:
       - .github/workflows/golangci.yml
 
 jobs:
-  golangci-lint
+  golangci-lint:
     name: golangci-lint
     runs-on: ubuntu-latest
     steps:
