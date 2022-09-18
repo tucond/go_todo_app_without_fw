@@ -1,8 +1,10 @@
 package store
 
 import (
+	"context"
 	"errors"
 
+	"github.com/jmorion/sqlx"
 	"github.com/tucond/go_todo_app_without_fw/entity"
 )
 
@@ -31,4 +33,18 @@ func (ts *TaskStore) All() entity.Tasks {
 		tasks[i-1] = t
 	}
 	return tasks
+}
+
+func (r *Repository) ListTasks(
+	ctx context.Context, db *sqlx.DB,
+) (entity.Tasks, error) {
+	tasks := entity.Tasks{}
+	sql := `SELECT
+	    id, user_id, title,
+	    status, created, modified
+		FROM task;`
+	if err := db.SelectionContext(ctx, &tasks, sql); err != nil {
+		return nil, err
+	}
+	return tasks, nil
 }
