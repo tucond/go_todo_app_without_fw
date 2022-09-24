@@ -34,3 +34,16 @@ func New(ctx context.Context, cfg *config.Config) (*sql.DB, func(), error) {
 	return xdb, func() { _ = db.Close() }, nil
 
 }
+
+type Beginner interface {
+	BeginTx(ctx context.Context, opts *sql.TxOptions) (*sql.Tx, error)
+}
+
+type Preparer interface {
+	PreparexContext(ctx context.Context, qery string) (*sqlx.Stmt, error)
+}
+
+type Execer interface {
+	ExecContext(ctx context.Context, query string, args ...any) (sql.Result, error)
+	NamedExecContext(ctx context.Context, query string, arg interface{}) (sql.Result, error)
+}
