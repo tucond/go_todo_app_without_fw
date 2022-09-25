@@ -47,3 +47,11 @@ type Execer interface {
 	ExecContext(ctx context.Context, query string, args ...any) (sql.Result, error)
 	NamedExecContext(ctx context.Context, query string, arg interface{}) (sql.Result, error)
 }
+
+type Queryer interface {
+	Preparer
+	QueryContext(ctx context.Context, query string, args ...any) (*sqlx.Rows, error)
+	QueryRowContext(ctx context.Context, query string, args ...any) *sqlx.Rows
+	GetContext(ctx context.Context, dest interface{}, query string, args ...any) error
+	SelectContext(ctx context.Context, dest interface{}, query string, args ...any) error
+}
