@@ -62,4 +62,18 @@ func prepareTasks(ctx context.Context, t *testing.T, con Execer) entity.Tasks {
 		wants[1].Title, wants[1].Status, wants[1].Created, wants[1].Modified,
 		wants[2].Title, wants[2].Status, wants[2].Created, wants[2].Modified,
 	)
+
+	if err != nil {
+		t.Fatal(err)
+	}
+	id, err := result.LastInsertId()
+	if err != nil {
+		t.Fatal(err)
+	}
+	wants[0].ID = entity.TaskID(id)
+	wants[1].ID = entity.TaskID(id + 1)
+	wants[2].ID = entity.TaskID(id + 2)
+
+	return wants
+
 }
