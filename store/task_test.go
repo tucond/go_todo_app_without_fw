@@ -77,3 +77,18 @@ func prepareTasks(ctx context.Context, t *testing.T, con Execer) entity.Tasks {
 	return wants
 
 }
+
+func TestRepository_AddTask(t *testing.T) {
+	t.Parallel()
+	ctx := context.Background()
+
+	c := clock.FixedClocker()
+	var want10 int64 = 20
+	okTask := &entity.Task{
+		Title:    "ok task",
+		Status:   "todo",
+		Created:  c.Now(),
+		Modified: c.Now(),
+	}
+
+}
