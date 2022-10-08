@@ -91,4 +91,12 @@ func TestRepository_AddTask(t *testing.T) {
 		Modified: c.Now(),
 	}
 
+	db, mock, err := sqlmock.New()
+	if err != nil{
+		t.Fatal(err)
+	}
+	t.Cleanup(func() {db.Close()})
+	mock ExeptExec(
+		
+	)
 }
