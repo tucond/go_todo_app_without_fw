@@ -92,11 +92,13 @@ func TestRepository_AddTask(t *testing.T) {
 	}
 
 	db, mock, err := sqlmock.New()
-	if err != nil{
+	if err != nil {
 		t.Fatal(err)
 	}
-	t.Cleanup(func() {db.Close()})
-	mock ExeptExec(
-		
-	)
+	t.Cleanup(func() { db.Close() })
+	mock.ExpectExec(
+		`INSERT INTO task \(title, status, created, modified\) VALUES\(\?, \?, \?, \?\)`,
+	).WithArgs(okTask.Title, okTask.Status, c.Now()).
+		WillReturnResult(sqlmock.NewResult(wantID, 1))
+
 }
